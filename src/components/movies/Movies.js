@@ -22,6 +22,7 @@ import Search from "../Search";
 import MovieBox from "../moviebox/MovieBox";
 import { Navbar, Container, Nav, Form, FormControl } from "react-bootstrap";
 
+
 //967780d831a3680144c23bf9c5fa53af
 
 const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
@@ -44,6 +45,14 @@ export default function Movies() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        console.log(data.results);
+        console.dir(data.results);
+        
+        for (let i = 0; i < 10; i++) {
+          console.log(data.results[i].id);;
+        }
+
+        console.log(data.results[0].id);
         setMovies(data.results);
       });
   }, []);
