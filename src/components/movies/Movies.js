@@ -33,35 +33,41 @@ const API_SEARCH =
   "https://api.themoviedb.org/3/search/movie?api_key=c7f08171b9f91195a6b1770200ac95c7&query";
 
 export default function Movies() {
-  // const [items, setItems] = useState([]);
+  // const [data, setdata] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  // const [query, setQuery] = useState("");
+
 
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
+
+  const [myData, setMyData] = useState([]);
+
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        console.log(data.results);
         console.dir(data.results);
-        
-        for (let i = 0; i < 10; i++) {
-          console.log(data.results[i].id);;
-        }
-
-        console.log(data.results[0].id);
         setMovies(data.results);
       });
+
+      fetch(`http://127.0.0.1:3003/movie/${query}`).then(
+        response => response.json()
+      ).then(data => setMyData(data.myData));
+
+      console.log(myData);
+    
+
+
+
   }, []);
 
   const searchMovie = async (e) => {
     e.preventDefault();
     console.log("Searching");
     try {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=c7f08171b9f91195a6b1770200ac95c7&query=${query}`;
+      const url = `http://127.0.0.1:3003/movie/${query}`;
       const res = await fetch(url);
       const data = await res.json();
       console.log(data);
@@ -87,8 +93,8 @@ export default function Movies() {
             value={query}
             onChange={changeHandler}></Search>
         </Form>
+        
       </Container>
-
       <div>
         {movies.length > 0 ? (
           <div className="container">
