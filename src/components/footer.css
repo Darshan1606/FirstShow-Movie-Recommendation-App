@@ -1,0 +1,21 @@
+.footer{
+    background-color:#111314;
+    color: #fff;
+}
+
+.list-unstyled{
+    padding: 0.2rem;
+    text-align: center;
+}
+.list-unstyled a{
+    outline: none;
+    text-decoration:none;
+    color: rgb(196, 59, 59);
+}
+.footer-copyright{
+    
+}
+.footer-copyright a{
+    text-decoration: none;
+    color: rgb(196, 59, 59);
+}

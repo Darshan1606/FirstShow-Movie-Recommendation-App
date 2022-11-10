@@ -1,0 +1,51 @@
+
+.center{
+    padding: 0.5rem;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin: auto auto;
+    
+}
+.center h1{
+    color:#fff;
+    font-size: 6vh;
+    font-weight:900;
+    
+}
+.center img{
+    width: 8rem;
+    height: 3rem;
+   
+}
+.me-2{
+    width: 50vh;
+}
+.me-auto{
+    text-align: left;
+}
+.me-auto h5{
+    color: #fff;
+    display: inline-block;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+.me-auto h5:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 5px;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(196, 59, 59);
+    transform-origin: bottom right;
+    transition: transform 0.30s ease-out;
+  }
+  
+  .me-auto h5:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
