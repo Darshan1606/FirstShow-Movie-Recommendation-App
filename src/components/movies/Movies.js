@@ -50,25 +50,31 @@ export default function Movies() {
       });
   }, []);
 
-
   useEffect(() => {
-    fetch(`http://127.0.0.1:3003/movie/${query}`).then((response) =>
-      console.log(response) 
-    );
-   
+    fetch(`http://127.0.0.1:3003/movie/Avatar`).then((response) => {
+      response.json().then((myData) => {
+        console.dir(myData.rec_id);
+        return myData;
+      });
+    });
   }, [query]);
 
   return (
     <>
-      <Container fluid>  
-        <Search search={(q) => setQuery(q)}></Search>  
+      <Container fluid>
+        <Search search={(q) => setQuery(q)}></Search>
       </Container>
       <div>
         {movies.length > 0 ? (
           <div className="container">
             <div className="grid">
+              
               {movies.map((movieReq) => (
-                <MovieBox key={movieReq.id} {...movieReq} />
+                if(movieReq.id === myData.rec_id)
+                {
+                  <MovieBox key={movieReq.id} {...movieReq} />
+                }
+                
               ))}
             </div>
           </div>
