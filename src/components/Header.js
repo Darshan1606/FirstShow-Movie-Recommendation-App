@@ -12,8 +12,8 @@ const Header = () => {
 
 
   return (
-    <div>
-      <Navbar bg="dark" expand="lg">
+    <div className="nav">
+      <Navbar  expand="lg">
         <Container>
           {/* <header className="center">
             <h1 >DARSHAN</h1>
