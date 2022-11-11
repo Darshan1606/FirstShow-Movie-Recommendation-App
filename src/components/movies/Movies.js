@@ -70,11 +70,7 @@ export default function Movies() {
             <div className="grid">
               
               {movies.map((movieReq) => (
-                if(movieReq.id === myData.rec_id)
-                {
-                  <MovieBox key={movieReq.id} {...movieReq} />
-                }
-                
+                <MovieBox key={movieReq.id} {...movieReq} />
               ))}
             </div>
           </div>
