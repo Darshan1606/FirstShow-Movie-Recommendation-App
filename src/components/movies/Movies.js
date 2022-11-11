@@ -22,7 +22,6 @@ import Search from "../Search";
 import MovieBox from "../moviebox/MovieBox";
 import { Navbar, Container, Nav, Form, FormControl } from "react-bootstrap";
 
-
 //967780d831a3680144c23bf9c5fa53af
 
 const getImage = (path) => `https://image.tmdb.org/t/p/w300/${path}`;
@@ -36,12 +35,10 @@ export default function Movies() {
   // const [data, setdata] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
 
   const [myData, setMyData] = useState([]);
-
 
   useEffect(() => {
     fetch(API_URL)
@@ -51,49 +48,20 @@ export default function Movies() {
         console.dir(data.results);
         setMovies(data.results);
       });
-
-      fetch(`http://127.0.0.1:3003/movie/${query}`).then(
-        response => response.json()
-      ).then(data => setMyData(data.myData));
-
-      console.log(myData);
-    
-
-
-
   }, []);
 
-  const searchMovie = async (e) => {
-    e.preventDefault();
-    console.log("Searching");
-    try {
-      const url = `http://127.0.0.1:3003/movie/${query}`;
-      const res = await fetch(url);
-      const data = await res.json();
-      console.log(data);
-      setMovies(data.results);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
-  const changeHandler = (e) => {
-    setQuery(e.target.value);
-  };
+  useEffect(() => {
+    fetch(`http://127.0.0.1:3003/movie/${query}`).then((response) =>
+      console.log(response) 
+    );
+   
+  }, [query]);
 
   return (
     <>
-      <Container fluid>
-        <Form  onSubmit={searchMovie} autoComplete="off">
-          <Search type="search"
-            placeholder="Movie Search"
-            className="me-2"
-            aria-label="search"
-            name="query"
-            value={query}
-            onChange={changeHandler}></Search>
-        </Form>
-        
+      <Container fluid>  
+        <Search search={(q) => setQuery(q)}></Search>  
       </Container>
       <div>
         {movies.length > 0 ? (
