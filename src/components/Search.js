@@ -8,13 +8,12 @@ export default function Search({ search }) {
   const onSearch = (q) => {
     setText(q);
     search(q);
-   
   };
 
   return (
     <div>
       <div class="search">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             onChange={(e) => onSearch(e.target.value)}

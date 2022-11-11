@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   MDBCard,
   MDBCardImage,
@@ -34,8 +34,10 @@ const API_SEARCH =
 export default function Movies() {
   // const [data, setdata] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const queryRef = useRef(null)
 
   const [movies, setMovies] = useState([]);
+  const [recommendation, setRecommendation] = useState([]);
   const [query, setQuery] = useState("");
 
   const [myData, setMyData] = useState([]);
@@ -51,26 +53,37 @@ export default function Movies() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:3003/movie/Avatar`).then((response) => {
-      response.json().then((myData) => {
-        console.dir(myData.rec_id);
-        return myData;
+    console.log(query);
+    clearTimeout(queryRef.current)
+    queryRef.current = setTimeout(() => {
+      fetch(`http://127.0.0.1:3003/movie/${query}`).then((response) => {
+        response.json().then((myData) => {
+          console.dir(myData.rec_id)
+          console.dir(myData)
+          setRecommendation(myData.rec_id)
+        });
       });
-    });
+    }, 1000)
   }, [query]);
 
   return (
     <>
       <Container fluid>
-        <Search search={(q) => setQuery(q)}></Search>
+        <Search search={(q) => {
+          setQuery(q)
+          console.log(q);
+          }}></Search>
       </Container>
       <div>
-        {movies.length > 0 ? (
-          <div className="container">
+        {recommendation.length > 0 ? (
+          <div className="cont">
             <div className="grid">
               
-              {movies.map((movieReq) => (
-                <MovieBox key={movieReq.id} {...movieReq} />
+              {recommendation.map((movieReq) => (
+                <MovieBox key={movieReq}
+                id={movieReq}
+                // {...movieReq}
+                />
               ))}
             </div>
           </div>

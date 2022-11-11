@@ -5,6 +5,7 @@ body {
   width: 100%;
   margin: 1em auto;
   display: flex;
+  
 }
 
 img {
@@ -22,10 +23,3 @@ h6 {
   font-weight: 900;
 }
 
-.grid {
-  display: grid;
-  margin-left: 0.5px;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 2em;
-  justify-content: center;
-}
